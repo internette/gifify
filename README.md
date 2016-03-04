@@ -1,5 +1,7 @@
 # GIPHIFY
 This is the readme for the library Giphify, a [GIPHY](http://giphy.com/) powered tooltip. There are zero dependencies.
+
+If you want to see it in action, check out [this Codepen](http://codepen.io/acjdesigns/full/aNvEpa/).
 ##How To Use
 1.  Download the JavaScript file (gifitup.min.js) and CSS file (gifitup.min.css)
 2.  Put the JavaScript and CSS files into your project folder
