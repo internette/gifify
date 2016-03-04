@@ -27,7 +27,13 @@ Giphify.prototype.ApiCall = function(query, apikey, el){
 	var $this = this;
 	var $el = el;
 	var xhr = new XMLHttpRequest();
-	xhr.open('GET', 'http://api.giphy.com/v1/gifs/search?q='+ query +'&api_key='+apikey);
+	var gifquery = '';
+	if(query.match(/\s/gi)){
+		gifquery = query.replace(/\s/gi, '+');
+	} else {
+		gifquery = query;
+	}
+	xhr.open('GET', 'http://api.giphy.com/v1/gifs/search?q='+ gifquery +'&api_key='+apikey);
 	xhr.send(null);
 	xhr.onreadystatechange = function () {
 		var DONE = 4; // readyState 4 means the request is done.
