@@ -1,1 +1,0 @@
-#tooltip{background:#000;text-align:center;color:#FFF;position:absolute;left:0;padding:10px;opacity:0}#tooltip:after{content:' ';display:block;position:absolute;bottom:-10px;left:50%;margin-left:-15px;border-right:10px solid transparent;border-top:15px solid #000;border-left:10px solid transparent}#tooltip img{margin:auto}a,p,span{display:inline-block}
