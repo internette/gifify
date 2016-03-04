@@ -28,4 +28,6 @@ $(document).ready(function(){
 ```
 
 ##What's to come?
-I'm planning on including color schemes, potentially the choice of a click to show the tooltip (if mouse over is not your thing). I'm also considering adding the ability to choose which direction your tooltip should appear (top, left, right, bottom). If you have any other ideas, please don't resist to reach out to me at [acj.gfx@gmail.com](mailto:acj.gfx@gmail.com);
+I'm planning on including color schemes, potentially the choice of a click to show the tooltip (if mouse over is not your thing). I'm also considering adding the ability to choose which direction your tooltip should appear (top, left, right, bottom). If you have any other ideas, please don't resist to reach out to me at [acj.gfx@gmail.com](mailto:acj.gfx@gmail.com). Please enjoy!
+
+![Please enjoy!](http://i.giphy.com/Myrl3DnFGuuvS.gif "Please Enjoy!")
