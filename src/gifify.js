@@ -28,18 +28,26 @@ _.prototype = {
 		tooltip_img.style.width = (el_w/2) + 'px';
 		return tooltip_img
 	},
+	checkForBodyMargin: function(){
+		
+	},
 	createToolTip: function(el_w, el_h, parent_elm, img_src){
 		var tooltip = document.createElement('div');
 		var tooltip_img = this.createTooltipImg(el_w, img_src)
 		tooltip.id = 'tooltip';
-		tooltip.style.left = (parent_elm.getBoundingClientRect().left - (el_w/4)) + 'px';
 		if (parent_elm.getBoundingClientRect().top < (el_h + 5)){
-			tooltip.className = 'bottom';
+			tooltip.className += 'bottom';
 			tooltip.style.top = (parent_elm.getBoundingClientRect().height + 25) + 'px';
 			console.log(tooltip.style.top)
 		} else {
-			tooltip.className = 'top';
+			tooltip.className += 'top';
 			tooltip.style.top = (parent_elm.getBoundingClientRect().top - (el_h/2 + 25)) + 'px';
+		}
+		if (parent_elm.getBoundingClientRect().left < el_w/2) {
+			tooltip.className += ' left'
+			tooltip.style.left = '25px';
+		} else {
+			tooltip.style.left = (parent_elm.getBoundingClientRect().left - (el_w/4)) + 'px';
 		}
 		tooltip.appendChild(tooltip_img);
 		return tooltip
