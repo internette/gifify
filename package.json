@@ -1,0 +1,27 @@
+{
+  "name": "gifify",
+  "version": "1.0.0",
+  "description": "This is the readme for the library Giphify, a [GIPHY](http://giphy.com/) powered tooltip. There are zero dependencies.",
+  "main": "gifify.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/twaffl3s/gifify.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/twaffl3s/gifify/issues"
+  },
+  "homepage": "https://github.com/twaffl3s/gifify#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.3.1",
+    "gulp-minify": "^1.0.0"
+  }
+}
