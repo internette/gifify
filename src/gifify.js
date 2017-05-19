@@ -105,7 +105,7 @@ _.prototype = {
 					$this.initializeTooltip(xhr.responseText, elm)
 				}
 			} else {
-				//Error Message Goes Here
+				console.error('There was a problem')
 			}
 		}
 	},
