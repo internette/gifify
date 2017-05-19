@@ -37,8 +37,7 @@ _.prototype = {
 		tooltip.id = 'tooltip';
 		if (parent_elm.getBoundingClientRect().top < (el_h + 5)){
 			tooltip.className += 'bottom';
-			tooltip.style.top = (parent_elm.getBoundingClientRect().height + 25) + 'px';
-			console.log(tooltip.style.top)
+			tooltip.style.top = (parent_elm.getBoundingClientRect().height + parent_elm.getBoundingClientRect().top) + 'px';
 		} else {
 			tooltip.className += 'top';
 			tooltip.style.top = (parent_elm.getBoundingClientRect().top - (el_h/2 + 25)) + 'px';
@@ -83,7 +82,11 @@ _.prototype = {
 		var $this = this;
 		if(Number(el.style.opacity)<1){
 			el.style.opacity = Number(el.style.opacity) + 0.2;
-			el.style.top = (Number(el.style.top.slice(0, -2) - 3)) + 'px';
+			if(el.className.match(/top/gi)){
+				el.style.top = (parseInt(el.style.top.slice(0, -2)) - 3) + 'px';
+			} else {
+				el.style.top = (parseInt(el.style.top.slice(0, -2))+ 3) + 'px';
+			}
 			setTimeout(function(){
 				return $this.fadeIn(el);
 			}, 20);
