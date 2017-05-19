@@ -1,4 +1,4 @@
-# GIPHIFY
+# GIFIFY
 This is the readme for the library Giphify, a [GIPHY](http://giphy.com/) powered tooltip. There are zero dependencies.
 
 If you want to see it in action, check out [this Codepen](http://codepen.io/acjdesigns/full/aNvEpa/).
