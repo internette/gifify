@@ -1,16 +1,16 @@
 var gulp = require('gulp');
-var minifyJS = require('gulp-minify');
+var minify = require('gulp-minify');
 var cleanCSS = require('gulp-clean-css');
 var rename = require('gulp-rename');
  
 gulp.task('compress-js', function() {
   gulp.src('src/*.js')
-    .pipe(minifyJS({
+    .pipe(minify({
         ext:{
             src:'.js',
             min:'.min.js'
         },
-        ignoreFiles: ['main.js', '*.min.js']
+        ignoreFiles: ['main.js']
     }))
     .pipe(gulp.dest('src'))
 });
