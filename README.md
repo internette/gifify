@@ -1,5 +1,5 @@
 # GIFIFY
-This is the readme for the library Giphify, a [GIPHY](http://giphy.com/) powered tooltip. There are zero dependencies.
+This is the readme for the library Gifify, a [GIPHY](http://giphy.com/) powered tooltip. There are zero dependencies.
 
 If you want to see it in action, check out [this Codepen](http://codepen.io/acjdesigns/full/aNvEpa/).
 ##How To Use
@@ -28,7 +28,7 @@ $(document).ready(function(){
 });
 ```
 
-##What's to come?
-I'm planning on including color schemes, potentially the choice of a click to show the tooltip (if mouse over is not your thing). I'm also considering adding the ability to choose which direction your tooltip should appear (top, left, right, bottom). If you have any other ideas, please don't resist to reach out to me at [acj.gfx@gmail.com](mailto:acj.gfx@gmail.com). Please enjoy!
+##Questions? Ideas?
+If you have any ideas or questions, file an issue or reach out to me at [acj.gfx@gmail.com](mailto:acj.gfx@gmail.com). Please enjoy!
 
 ![Please enjoy!](http://i.giphy.com/Myrl3DnFGuuvS.gif "Please Enjoy!")
