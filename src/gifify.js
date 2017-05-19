@@ -107,9 +107,11 @@ _.prototype = {
 			if (xhr.readyState === DONE) {
 				if (xhr.status === OK){
 					$this.initializeTooltip(xhr.responseText, elm)
+				} else {
+					console.error('There was a problem')
 				}
 			} else {
-				console.error('There was a problem')
+				// ERROR MESSAGE
 			}
 		}
 	},
