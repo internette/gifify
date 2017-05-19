@@ -28,7 +28,7 @@ $(document).ready(function(){
 });
 ```
 
-**Questions? Ideas?**
+##Questions? Ideas?
 If you have any ideas or questions, file an issue or reach out to me at [acj.gfx@gmail.com](mailto:acj.gfx@gmail.com). Please enjoy!
 
 ![Please enjoy!](http://i.giphy.com/Myrl3DnFGuuvS.gif "Please Enjoy!")
