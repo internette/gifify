@@ -12,11 +12,6 @@ gulp.task('compress-js', function() {
         },
         ignoreFiles: ['main.js']
     }))
-    .pipe(rename({
-      basename: 'gifify',
-      suffix: '.min',
-      extname: '.js'
-    }))
     .pipe(gulp.dest('src'))
 });
 gulp.task('compress-css', function(){
