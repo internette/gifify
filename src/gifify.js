@@ -43,14 +43,17 @@ _.prototype = {
 			tooltip.style.top = (parent_elm.getBoundingClientRect().top - (el_h/2 + 25)) + 'px';
 		}
 		if (parent_elm.getBoundingClientRect().left < el_w/2) {
-			tooltip.className += ' left'
+			tooltip.className += ' left';;
 			tooltip.style.left = '15px';
 		} else if (parent_elm.getBoundingClientRect().left > (window.innerWidth - el_w)) {
-			tooltip.className += ' right'
+			tooltip.className += ' right';
 			tooltip.style.left = 'auto';
 			tooltip.style.right = '15px';
 		} else {
-			tooltip.style.left = (parent_elm.getBoundingClientRect().left - (el_w/4)) + 'px';
+			var center_of_parent_elm = parent_elm.getBoundingClientRect().left + parent_elm.getBoundingClientRect().width/2;
+			// We add 20 to account for the padding on the left and the right
+			var half_of_tooltip = (el_w + 20)/2;
+			tooltip.style.left = (center_of_parent_elm - half_of_tooltip) + 'px';
 		}
 		tooltip.appendChild(tooltip_img);
 		return tooltip
@@ -69,8 +72,8 @@ _.prototype = {
 	imgProperties: function(chosen_gif){
 		return {
 			src: chosen_gif.url,
-			width: Number(chosen_gif.width),
-			height: Number(chosen_gif.height)
+			width: parseInt(chosen_gif.width),
+			height: parseInt(chosen_gif.height)
 		}
 	},
 	parsedResponseData: function(api_response){
