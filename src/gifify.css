@@ -28,6 +28,14 @@
   left: 10px;
   margin-left: 0;
 }
+#tooltip.right:after {
+  left: auto;
+  margin-left: 0;
+  right: 10px;
+}
 #tooltip img {
   margin:auto
+}
+.gifify {
+  float: right;
 }

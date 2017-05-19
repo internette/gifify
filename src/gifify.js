@@ -44,7 +44,11 @@ _.prototype = {
 		}
 		if (parent_elm.getBoundingClientRect().left < el_w/2) {
 			tooltip.className += ' left'
-			tooltip.style.left = '25px';
+			tooltip.style.left = '15px';
+		} else if (parent_elm.getBoundingClientRect().left > (window.innerWidth - el_w)) {
+			tooltip.className += ' right'
+			tooltip.style.left = 'auto';
+			tooltip.style.right = '15px';
 		} else {
 			tooltip.style.left = (parent_elm.getBoundingClientRect().left - (el_w/4)) + 'px';
 		}
