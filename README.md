@@ -2,7 +2,9 @@
 This is the readme for the library Gifify, a [GIPHY](http://giphy.com/) powered tooltip. There are zero dependencies.
 
 If you want to see it in action, check out [this Codepen](http://codepen.io/acjdesigns/full/aNvEpa/).
-##How To Use
+
+## How To Use
+
 1.  Download the JavaScript file (gifify.min.js) and CSS file (gifify.min.css)
 1.  Put the JavaScript and CSS files into your project folder
 1.  Link to the JavaScript and CSS files in your html file
@@ -28,7 +30,8 @@ $(document).ready(function(){
 });
 ```
 
-##Questions? Ideas?
+## Questions? Ideas?
+
 If you have any ideas or questions, file an issue or reach out to me at [acj.gfx@gmail.com](mailto:acj.gfx@gmail.com). Please enjoy!
 
 ![Please enjoy!](http://i.giphy.com/Myrl3DnFGuuvS.gif "Please Enjoy!")
