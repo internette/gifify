@@ -37,7 +37,7 @@ _.prototype = {
 		// Then increased by 25 because arrow height plus top and bottom padding
 		// Then add escape room for mouse if moved in the direction of the tooltip
 		var tooltip_height = 125
-		tooltip.id = 'tooltip';
+		tooltip.id = 'gifify-tooltip';
 		if (attached_elm.getBoundingClientRect().top < (tooltip_height)){
 			tooltip.className += 'bottom';
 			tooltip.style.top = ((attached_elm.getBoundingClientRect().top + attached_elm.getBoundingClientRect().height) + 10) + 'px';
