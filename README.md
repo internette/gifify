@@ -30,6 +30,10 @@ $(document).ready(function(){
 });
 ```
 
+## Want to style your tooltip?
+
+The toltip selector is `#gifify-tooltip`, using `:after` for the arrow
+
 ## Questions? Ideas?
 
 If you have any ideas or questions, file an issue or reach out to me at [acj.gfx@gmail.com](mailto:acj.gfx@gmail.com). Please enjoy!
