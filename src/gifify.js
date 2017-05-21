@@ -37,6 +37,7 @@ _.prototype = {
 		// Then increased by 25 because arrow height plus top and bottom padding
 		// Then add escape room for mouse if moved in the direction of the tooltip
 		var tooltip_height = 125
+		var tooltip_width = el_w/2;
 		tooltip.id = 'gifify-tooltip';
 		if (attached_elm.getBoundingClientRect().top < (tooltip_height)){
 			tooltip.className += 'bottom';
@@ -45,18 +46,23 @@ _.prototype = {
 			tooltip.className += 'top';
 			tooltip.style.top = (attached_elm.getBoundingClientRect().top - tooltip_height - 10) + 'px';
 		}
-		if (attached_elm.getBoundingClientRect().left < el_w/2) {
+		if (attached_elm.getBoundingClientRect().left < tooltip_width) {
 			tooltip.className += ' left';
 			tooltip.style.left = attached_elm.getBoundingClientRect().left + 'px';
-		} else if (attached_elm.getBoundingClientRect().left > (window.innerWidth - el_w)) {
+		} else if (attached_elm.getBoundingClientRect().left > (window.innerWidth - tooltip_width)) {
 			tooltip.className += ' right';
 			tooltip.style.left = 'auto';
 			tooltip.style.right = '15px';
 		} else {
-			var center_of_parent_elm = attached_elm.getBoundingClientRect().left + attached_elm.getBoundingClientRect().width/2;
-			// We add 20 to account for the padding on the left and the right
-			var half_of_tooltip = (el_w + 20)/2;
-			tooltip.style.left = (center_of_parent_elm - half_of_tooltip) + 'px';
+			// We add the left alignment to the 1/2 width of the attached_elm to set 
+			// tooltip left align to the middle of the element
+			var center_of_attached_elm = (attached_elm.getBoundingClientRect().left + (attached_elm.getBoundingClientRect().width/2));
+			// Then we get the value of half of the tooltip and add 10 to account
+			// for the padding
+			var half_of_tooltip = (tooltip_width+10)/2;
+			// Finally, we subtract half of the tooltip width to center the tooltip
+			// element as a whole
+			tooltip.style.left = (center_of_attached_elm - half_of_tooltip) + 'px';
 		}
 		tooltip.appendChild(tooltip_img);
 		return tooltip
