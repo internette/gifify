@@ -5,10 +5,10 @@
   position:absolute;
   left:0;
   padding:10px;
-  opacity:0
+  opacity:0;
 }
 #tooltip:after {
-  content:' ';
+  content:'';
   display:block;
   position:absolute;
   left:50%;
@@ -35,7 +35,4 @@
 }
 #tooltip img {
   margin:auto
-}
-.gifify {
-  float: right;
 }
