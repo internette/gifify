@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  padding: 5px;
+}
+a span {
+  color: red;
+}
+a:first-child {
+  float: left;
+}
+a:nth-child(2) {
+  float: right;
+}
+a:last-of-type {
+  margin-top: 30vh;
+  display: block;
+}
