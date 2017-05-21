@@ -47,7 +47,7 @@ _.prototype = {
 		}
 		if (attached_elm.getBoundingClientRect().left < el_w/2) {
 			tooltip.className += ' left';
-			tooltip.style.left = '15px';
+			tooltip.style.left = attached_elm.getBoundingClientRect().left + 'px';
 		} else if (attached_elm.getBoundingClientRect().left > (window.innerWidth - el_w)) {
 			tooltip.className += ' right';
 			tooltip.style.left = 'auto';
