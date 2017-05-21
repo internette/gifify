@@ -4,7 +4,7 @@ var cleanCSS = require('gulp-clean-css');
 var rename = require('gulp-rename');
  
 gulp.task('compress-js', function() {
-  gulp.src('src/*.js')
+  gulp.src('src/gifify.js')
     .pipe(minify({
         ext:{
             src:'.js',
@@ -15,7 +15,7 @@ gulp.task('compress-js', function() {
     .pipe(gulp.dest('src'))
 });
 gulp.task('compress-css', function(){
-  gulp.src('src/*.css')
+  gulp.src('src/gifify.css')
     .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(rename({
       basename: 'gifify',
