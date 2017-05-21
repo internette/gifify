@@ -11,13 +11,14 @@ body {
 a span {
   color: red;
 }
-a:first-child {
+a:first-of-type {
   float: left;
 }
-a:nth-child(2) {
+a:nth-of-type(2) {
   float: right;
 }
 a:last-of-type {
-  margin-top: 30vh;
   display: block;
+  margin-top: 30vh;
+  text-align: center;
 }
