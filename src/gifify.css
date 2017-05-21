@@ -1,4 +1,4 @@
-#tooltip {
+#gifify-tooltip {
   background:#000;
   text-align:center;
   color:#fff;
@@ -7,7 +7,7 @@
   padding:10px;
   opacity:0;
 }
-#tooltip:after {
+#gifify-tooltip:after {
   content:'';
   display:block;
   position:absolute;
@@ -16,23 +16,23 @@
   border-right:10px solid transparent;
   border-left:10px solid transparent
 }
-#tooltip.top:after {
+#gifify-tooltip.top:after {
   border-top:15px solid #000;
   bottom:-10px
 }
-#tooltip.bottom:after {
+#gifify-tooltip.bottom:after {
   border-bottom:15px solid #000;
   top:-10px
 }
-#tooltip.left:after {
+#gifify-tooltip.left:after {
   left: 10px;
   margin-left: 0;
 }
-#tooltip.right:after {
+#gifify-tooltip.right:after {
   left: auto;
   margin-left: 0;
   right: 10px;
 }
-#tooltip img {
+#gifify-tooltip img {
   margin:auto
 }
