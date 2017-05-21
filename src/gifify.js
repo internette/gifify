@@ -28,29 +28,32 @@ _.prototype = {
 		tooltip_img.style.width = (el_w/2) + 'px';
 		return tooltip_img
 	},
-	checkForBodyMargin: function(){
-		
-	},
-	createToolTip: function(el_w, el_h, parent_elm, img_src){
+	createToolTip: function(el_w, attached_elm, img_src){
 		var tooltip = document.createElement('div');
 		var tooltip_img = this.createTooltipImg(el_w, img_src)
+		// tooltip_height is 100 because fixed_height is chosen, which is 200
+		// Then we cut the width in half in createTooltipImg, meaning we 
+		// cut the height in half too
+		// Then increased by 25 because arrow height plus top and bottom padding
+		// Then add escape room for mouse if moved in the direction of the tooltip
+		var tooltip_height = 125
 		tooltip.id = 'tooltip';
-		if (parent_elm.getBoundingClientRect().top < (el_h + 5)){
+		if (attached_elm.getBoundingClientRect().top < (tooltip_height)){
 			tooltip.className += 'bottom';
-			tooltip.style.top = (parent_elm.getBoundingClientRect().height + parent_elm.getBoundingClientRect().top + 7) + 'px';
+			tooltip.style.top = ((attached_elm.getBoundingClientRect().top + attached_elm.getBoundingClientRect().height) + 10) + 'px';
 		} else {
 			tooltip.className += 'top';
-			tooltip.style.top = (parent_elm.getBoundingClientRect().top - (el_h/2 + parent_elm.getBoundingClientRect().top + 7)) + 'px';
+			tooltip.style.top = (attached_elm.getBoundingClientRect().top - tooltip_height - 10) + 'px';
 		}
-		if (parent_elm.getBoundingClientRect().left < el_w/2) {
-			tooltip.className += ' left';;
+		if (attached_elm.getBoundingClientRect().left < el_w/2) {
+			tooltip.className += ' left';
 			tooltip.style.left = '15px';
-		} else if (parent_elm.getBoundingClientRect().left > (window.innerWidth - el_w)) {
+		} else if (attached_elm.getBoundingClientRect().left > (window.innerWidth - el_w)) {
 			tooltip.className += ' right';
 			tooltip.style.left = 'auto';
 			tooltip.style.right = '15px';
 		} else {
-			var center_of_parent_elm = parent_elm.getBoundingClientRect().left + parent_elm.getBoundingClientRect().width/2;
+			var center_of_parent_elm = attached_elm.getBoundingClientRect().left + attached_elm.getBoundingClientRect().width/2;
 			// We add 20 to account for the padding on the left and the right
 			var half_of_tooltip = (el_w + 20)/2;
 			tooltip.style.left = (center_of_parent_elm - half_of_tooltip) + 'px';
@@ -58,8 +61,8 @@ _.prototype = {
 		tooltip.appendChild(tooltip_img);
 		return tooltip
 	},
-	addTooltipToBody: function(img_src, el_w, el_h, parent_elm){
-		var tooltip = this.createToolTip(el_w, el_h, parent_elm, img_src);
+	addTooltipToBody: function(img_src, el_w, attached_elm){
+		var tooltip = this.createToolTip(el_w, attached_elm, img_src);
 		document.body.appendChild(tooltip);
 	},
 	randInt: function(min, max) {
@@ -77,8 +80,7 @@ _.prototype = {
 	imgProperties: function(chosen_gif){
 		return {
 			src: chosen_gif.url,
-			width: parseInt(chosen_gif.width),
-			height: parseInt(chosen_gif.height)
+			width: parseInt(chosen_gif.width)
 		}
 	},
 	parsedResponseData: function(api_response){
@@ -87,7 +89,7 @@ _.prototype = {
 	initializeTooltip: function(api_response, elm){
 		var gifs = this.parsedResponseData(api_response);
 		var img_props = this.imgProperties(this.getRandomImage(gifs))
-		this.addTooltipToBody(img_props.src, img_props.width, img_props.height, elm);
+		this.addTooltipToBody(img_props.src, img_props.width, elm);
 		this.fadeIn(document.getElementById('tooltip'));
 	},
 	fadeIn: function(el){
@@ -95,9 +97,9 @@ _.prototype = {
 		if(Number(el.style.opacity)<1){
 			el.style.opacity = Number(el.style.opacity) + 0.25;
 			if(el.className.match(/top/gi)){
-				el.style.top = (parseInt(el.style.top.slice(0, -2)) - 3) + 'px';
+				el.style.top = (parseInt(el.style.top.slice(0, -2)) - 2) + 'px';
 			} else {
-				el.style.top = (parseInt(el.style.top.slice(0, -2))+ 3) + 'px';
+				el.style.top = (parseInt(el.style.top.slice(0, -2)) + 2) + 'px';
 			}
 			setTimeout(function(){
 				return $this.fadeIn(el);
