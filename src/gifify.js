@@ -37,10 +37,10 @@ _.prototype = {
 		tooltip.id = 'tooltip';
 		if (parent_elm.getBoundingClientRect().top < (el_h + 5)){
 			tooltip.className += 'bottom';
-			tooltip.style.top = (parent_elm.getBoundingClientRect().height + parent_elm.getBoundingClientRect().top) + 'px';
+			tooltip.style.top = (parent_elm.getBoundingClientRect().height + parent_elm.getBoundingClientRect().top + 7) + 'px';
 		} else {
 			tooltip.className += 'top';
-			tooltip.style.top = (parent_elm.getBoundingClientRect().top - (el_h/2 + 25)) + 'px';
+			tooltip.style.top = (parent_elm.getBoundingClientRect().top - (el_h/2 + parent_elm.getBoundingClientRect().top + 7)) + 'px';
 		}
 		if (parent_elm.getBoundingClientRect().left < el_w/2) {
 			tooltip.className += ' left';;
@@ -65,9 +65,14 @@ _.prototype = {
 	randInt: function(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	},
-	getRandomImage: function(images){
-		var rand_int = this.randInt(0, images.length);
-		return images[rand_int].images.fixed_height;
+	getRandomImage: function(gifs){
+		var rand_int = this.randInt(0, gifs.length);
+		var selected_gif = gifs[rand_int];
+		if(selected_gif.hasOwnProperty('images')){
+			return selected_gif.images.fixed_height;
+		} else {
+			return selected_gif.fixed_height
+		}
 	},
 	imgProperties: function(chosen_gif){
 		return {
@@ -88,7 +93,7 @@ _.prototype = {
 	fadeIn: function(el){
 		var $this = this;
 		if(Number(el.style.opacity)<1){
-			el.style.opacity = Number(el.style.opacity) + 0.2;
+			el.style.opacity = Number(el.style.opacity) + 0.25;
 			if(el.className.match(/top/gi)){
 				el.style.top = (parseInt(el.style.top.slice(0, -2)) - 3) + 'px';
 			} else {
@@ -121,8 +126,8 @@ _.prototype = {
 	fadeOut: function(el){
 		var $this = this;
 		if(Number(el.style.opacity)>0){
-			el.style.opacity = Number(el.style.opacity) - 0.2;
-			el.style.top = (Number(el.style.top.slice(0, -2)) + 3) + 'px';
+			el.style.opacity = Number(el.style.opacity) - 0.25;
+			el.style.top = (Number(el.style.top.slice(0, -2)) + 2) + 'px';
 			setTimeout(function(){
 				return $this.fadeOut(el);
 			}, 30);
