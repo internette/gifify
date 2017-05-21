@@ -90,7 +90,7 @@ _.prototype = {
 		var gifs = this.parsedResponseData(api_response);
 		var img_props = this.imgProperties(this.getRandomImage(gifs))
 		this.addTooltipToBody(img_props.src, img_props.width, elm);
-		this.fadeIn(document.getElementById('tooltip'));
+		this.fadeIn(document.getElementById('gifify-tooltip'));
 	},
 	fadeIn: function(el){
 		var $this = this;
@@ -146,7 +146,7 @@ _.prototype = {
 				}, 100);
 			});
 			$this.init_elms[i].addEventListener('mouseout', function(){
-				var tooltips = document.querySelectorAll('#tooltip');
+				var tooltips = document.querySelectorAll('#gifify-tooltip');
 				for(var i = 0; i<tooltips.length; i++){
 					var tooltip = tooltips[i];
 					$this.fadeOut(tooltip);
