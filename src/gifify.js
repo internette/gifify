@@ -51,8 +51,7 @@ _.prototype = {
 			tooltip.style.left = attached_elm.getBoundingClientRect().left + 'px';
 		} else if (attached_elm.getBoundingClientRect().left > (window.innerWidth - tooltip_width)) {
 			tooltip.className += ' right';
-			tooltip.style.left = 'auto';
-			tooltip.style.right = '15px';
+			tooltip.style.left = (window.innerWidth - tooltip_width - 35) + 'px';
 		} else {
 			// We add the left alignment to the 1/2 width of the attached_elm to set 
 			// tooltip left align to the middle of the element
