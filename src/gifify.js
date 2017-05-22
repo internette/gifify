@@ -7,6 +7,12 @@
 =========================================================================================*/
 var _ = self.Gifify = function (opts) {
 		this.query = opts.query;
+		// tooltip_height is 100 because fixed_height is chosen, which is 200
+		// Then we cut the width in half in createTooltipImg, meaning we 
+		// cut the height in half too
+		// Then increased by 25 because arrow height plus top and bottom padding
+		// Then add escape room for mouse if moved in the direction of the tooltip
+		this.tooltip_height = 125
 }
 
 _.prototype = {
@@ -22,52 +28,97 @@ _.prototype = {
 	get getGiphyString(){
 		return 'http://api.giphy.com/v1/gifs/search?q='+ this.cleanedQuery +'&api_key=dc6zaTOxFJmzC'
 	},
-	createTooltipImg: function(el_w, img_src){
+	createTooltipImg: function(tooltip_width, img_src){
 		var tooltip_img = document.createElement('img');
 		tooltip_img.src = img_src;
-		tooltip_img.style.width = (el_w/2) + 'px';
+		tooltip_img.style.width = (tooltip_width) + 'px';
 		return tooltip_img
 	},
-	createToolTip: function(el_w, attached_elm, img_src){
-		var tooltip = document.createElement('div');
-		var tooltip_img = this.createTooltipImg(el_w, img_src)
-		// tooltip_height is 100 because fixed_height is chosen, which is 200
-		// Then we cut the width in half in createTooltipImg, meaning we 
-		// cut the height in half too
-		// Then increased by 25 because arrow height plus top and bottom padding
-		// Then add escape room for mouse if moved in the direction of the tooltip
-		var tooltip_height = 125
-		var tooltip_width = el_w/2;
-		tooltip.id = 'gifify-tooltip';
-		if (attached_elm.getBoundingClientRect().top < (tooltip_height)){
-			tooltip.className += 'bottom';
-			tooltip.style.top = ((attached_elm.getBoundingClientRect().top + attached_elm.getBoundingClientRect().height) + 10) + 'px';
+	createConditional: function(conditional, true_fn, false_fn){
+		if (conditional){
+			return true_fn()
 		} else {
-			tooltip.className += 'top';
-			tooltip.style.top = (attached_elm.getBoundingClientRect().top - tooltip_height - 10) + 'px';
+			return false_fn()
 		}
-		if (attached_elm.getBoundingClientRect().left < tooltip_width) {
-			tooltip.className += ' left';
-			tooltip.style.left = attached_elm.getBoundingClientRect().left + 'px';
-		} else if (attached_elm.getBoundingClientRect().left > (window.innerWidth - tooltip_width)) {
-			tooltip.className += ' right';
-			tooltip.style.left = (window.innerWidth - tooltip_width - 35) + 'px';
-		} else {
-			// We add the left alignment to the 1/2 width of the attached_elm to set 
-			// tooltip left align to the middle of the element
-			var center_of_attached_elm = (attached_elm.getBoundingClientRect().left + (attached_elm.getBoundingClientRect().width/2));
-			// Then we get the value of half of the tooltip and add 10 to account
-			// for the padding
-			var half_of_tooltip = (tooltip_width+10)/2;
-			// Finally, we subtract half of the tooltip width to center the tooltip
-			// element as a whole
-			tooltip.style.left = (center_of_attached_elm - half_of_tooltip) + 'px';
-		}
-		tooltip.appendChild(tooltip_img);
+	},
+	styledToolTip: function(tooltip, attached_elm, img_width){
+		tooltip.id = 'gifify-tooltip'
+		tooltip.style.top = this.topPosition(attached_elm)
+		tooltip.style.left = this.leftPosition(attached_elm, img_width)
+		tooltip.className = this.combineClasses(attached_elm, img_width)
 		return tooltip
 	},
-	addTooltipToBody: function(img_src, el_w, attached_elm){
-		var tooltip = this.createToolTip(el_w, attached_elm, img_src);
+	topPosition: function(attached_elm){
+		return this.createConditional(
+			(attached_elm.getBoundingClientRect().top < this.tooltip_height),
+			function(){
+				return ((attached_elm.getBoundingClientRect().top + attached_elm.getBoundingClientRect().height) + 10) + 'px'
+			}, function(){
+				return (attached_elm.getBoundingClientRect().top - $this.tooltip_height - 10) + 'px'
+			}
+		)
+	},
+	leftPosition: function(attached_elm, tooltip_width){
+		return this.createConditional(
+			(attached_elm.getBoundingClientRect().left < tooltip_width),
+			function(){
+				return attached_elm.getBoundingClientRect().left + 'px'
+			}, function(){
+				return $this.createConditional(
+					(attached_elm.getBoundingClientRect().left > (window.innerWidth - tooltip_width)), 
+					function(){
+						return (window.innerWidth - tooltip_width - 35) + 'px'
+					}, function(){
+						// We add the left alignment to the 1/2 width of the attached_elm to set 
+						// tooltip left align to the middle of the element
+						var center_of_attached_elm = (attached_elm.getBoundingClientRect().left + (attached_elm.getBoundingClientRect().width/2))
+						// Then we get the value of half of the tooltip and add 10 to account
+						// for the padding
+						var half_of_tooltip = (tooltip_width+10)/2
+						// Finally, we subtract half of the tooltip width to center the tooltip
+						// element as a whole
+						return (center_of_attached_elm - half_of_tooltip) + 'px'
+					}
+				)
+			}
+		)
+	},
+	combineClasses: function(attached_elm, tooltip_width){
+		var classes = '', $this = this
+		classes += this.createConditional(
+			(attached_elm.getBoundingClientRect().top < this.tooltip_height),
+			function(){
+				return 'bottom'
+			}, function(){
+				return 'top'
+			})
+		classes += ' '
+		classes += this.createConditional(
+			(attached_elm.getBoundingClientRect().left < tooltip_width),
+			function(){
+				return 'left'
+			}, function(){
+				return $this.createConditional(
+					(attached_elm.getBoundingClientRect().left > (window.innerWidth - tooltip_width)), 
+					function(){
+						return 'right'
+					}, function(){
+						return ''
+					}
+				)
+			}
+		)
+		classes = classes.trim()
+		return classes
+	},
+	createGifToolTip: function(img_props, attached_elm){
+		var tooltip = this.styledToolTip(document.createElement('div'), attached_elm, img_props.width/2);
+		var tooltip_img = this.createTooltipImg(img_props.width/2, img_props.src)
+		tooltip.appendChild(tooltip_img)
+		return tooltip
+	},
+	addTooltipToBody: function(img_props, attached_elm){
+		var tooltip = this.createGifToolTip(img_props, attached_elm);
 		document.body.appendChild(tooltip);
 	},
 	randInt: function(min, max) {
@@ -91,10 +142,10 @@ _.prototype = {
 	parsedResponseData: function(api_response){
 		return JSON.parse(api_response).data;
 	},
-	initializeTooltip: function(api_response, elm){
+	initializeTooltip: function(api_response, attached_elm){
 		var gifs = this.parsedResponseData(api_response);
 		var img_props = this.imgProperties(this.getRandomImage(gifs))
-		this.addTooltipToBody(img_props.src, img_props.width, elm);
+		this.addTooltipToBody(img_props, attached_elm);
 		this.fadeIn(document.getElementById('gifify-tooltip'));
 	},
 	fadeIn: function(el){
