@@ -6,7 +6,7 @@
 
 =========================================================================================*/
 var _ = self.Gifify = function (opts) {
-		this.query = opts.query;
+		this.selector = opts.selector;
 		// tooltip_height is 100 because fixed_height is chosen, which is 200
 		// Then we cut the width in half in createTooltipImg, meaning we 
 		// cut the height in half too
@@ -17,13 +17,13 @@ var _ = self.Gifify = function (opts) {
 
 _.prototype = {
 	get init_elms(){
-		return this.getAllElements(this.query)
+		return this.getAllElements(this.selector)
 	},
 	getAllElements: function(selector){
 		return document.querySelectorAll(selector);
 	},
 	get cleanedQuery(){
-		return this.query.match(/\s/gi) ? this.query.replace(/\s/gi, '+') : this.query
+		return this.selector.match(/\s/gi) ? this.selector.replace(/\s/gi, '+') : this.selector
 	},
 	get getGiphyString(){
 		return 'http://api.giphy.com/v1/gifs/search?q='+ this.cleanedQuery +'&api_key=dc6zaTOxFJmzC'
@@ -194,7 +194,7 @@ _.prototype = {
 		}
 	},
 	gifify: function(){
-		for(var i = 0; i<this.getAllElements(this.query).length; i++){
+		for(var i = 0; i<this.getAllElements(this.selector).length; i++){
 			$this = this;
 			this.init_elms[i].addEventListener('mouseenter', function(e){
 				setTimeout(function(){
@@ -215,7 +215,7 @@ var Wrapper = function (user_query) {
     Wrapper.prototype = _.prototype;
     Wrapper.fn = _.prototype;
     return new Gifify({
-			query: user_query
+			selector: user_query
 		});
 }
 $ = Wrapper;
