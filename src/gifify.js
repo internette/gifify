@@ -163,7 +163,7 @@ _.prototype = {
 	apiCall: function(elm){
 		var $this = this;
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', 'http://api.giphy.com/v1/gifs/search?q='+ this.cleanedQuery(elm.innerHTML) +'&api_key=dc6zaTOxFJmzC');
+		xhr.open('GET', 'https://api.giphy.com/v1/gifs/search?q='+ this.cleanedQuery(elm.innerHTML) +'&api_key=dc6zaTOxFJmzC');
 		xhr.send(null);
 		xhr.onreadystatechange = function () {
 			var DONE = 4; // readyState 4 means the request is done.
