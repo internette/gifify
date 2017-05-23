@@ -22,11 +22,9 @@ _.prototype = {
 	getAllElements: function(selector){
 		return document.querySelectorAll(selector);
 	},
-	get cleanedQuery(){
-		return this.selector.match(/\s/gi) ? this.selector.replace(/\s/gi, '+') : this.selector
-	},
-	get getGiphyString(){
-		return 'http://api.giphy.com/v1/gifs/search?q='+ this.cleanedQuery +'&api_key=dc6zaTOxFJmzC'
+	cleanedQuery: function(query){
+		console.log(query)
+		return query.match(/\s/gi) ? query.replace(/\s/gi, '+').toLowerCase() : query.toLowerCase()
 	},
 	createTooltipImg: function(tooltip_width, img_src){
 		var tooltip_img = document.createElement('img');
@@ -165,7 +163,7 @@ _.prototype = {
 	apiCall: function(elm){
 		var $this = this;
 		var xhr = new XMLHttpRequest();
-		xhr.open('GET', 'http://api.giphy.com/v1/gifs/search?q='+ this.cleanedQuery +'&api_key=dc6zaTOxFJmzC');
+		xhr.open('GET', 'http://api.giphy.com/v1/gifs/search?q='+ this.cleanedQuery(elm.innerHTML) +'&api_key=dc6zaTOxFJmzC');
 		xhr.send(null);
 		xhr.onreadystatechange = function () {
 			var DONE = 4; // readyState 4 means the request is done.
